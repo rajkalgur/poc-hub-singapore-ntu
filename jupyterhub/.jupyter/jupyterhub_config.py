@@ -30,20 +30,10 @@ c.LDAPAuthenticator.escape_userdn = False
 c.LDAPAuthenticator.lookup_dn_search_user = os.environ['LDAP_SEARCH_USER']
 c.LDAPAuthenticator.lookup_dn_search_password = os.environ['LDAP_SEARCH_PASSWORD']
 
-student_authenticator = LDAPAuthenticator()
-student_authenticator.server_address = 'student.main.ntu.edu.sg'
-student_authenticator.bind_dn_template = ['student\\{username}']
-student_authenticator.user_search_base = 'DC=student,DC=main,DC=ntu,DC=edu,DC=sg'
-
-staff_authenticator = LDAPAuthenticator()
-staff_authenticator.server_address = 'staff.main.ntu.edu.sg'
-staff_authenticator.bind_dn_template = ['staff\\{username}']
-staff_authenticator.user_search_base = 'DC=staff,DC=main,DC=ntu,DC=edu,DC=sg'
-
-assoc_authenticator = LDAPAuthenticator()
-assoc_authenticator.server_address = 'assoc.main.ntu.edu.sg'
-assoc_authenticator.bind_dn_template = ['assoc\\{username}']
-assoc_authenticator.user_search_base = 'DC=assoc,DC=main,DC=ntu,DC=edu,DC=sg'
+tmw_authenticator = LDAPAuthenticator()
+tmw_authenticator.server_address = 'tmw.com'
+tmw_authenticator.bind_dn_template = ['tmw\\{username}']
+tmw_authenticator.user_search_base = 'DC=tmw'
 
 from jupyterhub.auth import Authenticator
 
@@ -54,12 +44,8 @@ class MultiLDAPAuthenticator(Authenticator):
 
         data['username'] = data['username'].lower()
 
-        if domain == 'student':
-            return student_authenticator.authenticate(handler, data)
-        elif domain == 'staff':
-            return staff_authenticator.authenticate(handler, data)
-        elif domain == 'assoc':
-            return assoc_authenticator.authenticate(handler, data)
+        if domain == 'tmw':
+            return tmw_authenticator.authenticate(handler, data)        
 
         self.log.warn('domain:%s Unknown authentication domain name', domain)
         return None
