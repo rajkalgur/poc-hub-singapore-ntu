@@ -10,8 +10,8 @@ USER root
     yum -y clean all --enablerepo='*' --skip-broken
 
 RUN yum install -y libaio && \
-    rpm -i oracle-instantclient19.8-basic-19.8.0.0.0-1.x86_64.rpm && \
-	rpm -i oracle-instantclient19.8-sqlplus-19.8.0.0.0-1.x86_64.rpm
+    rpm -i ../packages/oracle-instantclient19.8-basic-19.8.0.0.0-1.x86_64.rpm && \
+	rpm -i ../packages/oracle-instantclient19.8-sqlplus-19.8.0.0.0-1.x86_64.rpm
 	
 
 USER 1001
