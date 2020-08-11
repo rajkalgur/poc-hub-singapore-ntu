@@ -15,7 +15,7 @@ USER root
 
 RUN pip install --upgrade snowflake-connector-python
 
-RUN pip install -google-cloud-storage
+RUN pip install google-cloud-storage
 RUN pip install boto3
 RUN pip install cx_oracle 
 
