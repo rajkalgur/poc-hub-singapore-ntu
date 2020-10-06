@@ -18,10 +18,6 @@ RUN yum install -y libaio && \
     pip install boto3 && \
     pip install cx_oracle
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends libav-tools rsync && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*	
 	
 LABEL io.k8s.description="S2I builder for Jupyter (minimal-notebook)." \
       io.k8s.display-name="Jupyter (minimal-notebook)" \
